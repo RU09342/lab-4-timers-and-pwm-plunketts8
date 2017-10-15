@@ -1,3 +1,63 @@
+# Software PWM
+
+The goal of this lab was to write a program that would utilize hardware techniques to synthesize PWM on an MSP430.
+
+## Implementation
+
+This part of the lab is very similair to the software PWM section. The difference being that this section uses the onboard PWM hardware within Timer A. 
+
+Similair to the other sections of this lab the correct pins need to be initialized as inputs and outputs. 
+
+```c
+	WDTCTL = WDTPW + WDTHOLD or WDTCTL = WDTPW | WDTHOLD
+```
+The pull up or pull down resistor should be enabled and then selected. In the example below the pull up is chosen.
+
+```c
+	P1REN|=BIT1;
+	P1OUT|=BIT1; 
+```
+
+The below code shows how to set up Timer A, SMCLK in up mode.
+```c
+	TA0CTL = TASSEL_2 + MC_1 ;
+
+```
+
+Using the method discussed in class, TA0CCR0 is initialized at 1000-1=999. TA0CCR1 is initialized at 500 setting the duty cycle to 50% at 1 kHz. The code below shows how to implement this.
+```c
+	TA0CCTL1 = (CCIE);
+	TA0CCTL0 = (CCIE);
+	TA0CCR0 = 1000-1;                        
+	TA0CCR1 = 500;                           
+
+```
+The code below shows the bulk of the functionality of the hardware PWM as well as the extra work. Since brightness increases at a logarithmic scale, the logNum equation changes the brightness in increments of 10.  
+```c
+while(1)
+    {
+        if(!(P1IN & BIT1))
+        {
+            P9OUT |= BIT7; //Sets P9.4
+            if(taps > 0)
+            {
+                taps--;
+                double logNum  = log10(taps) * 100.0;
+                int incrementNum = (100 - logNum);
+                TA0CCR0 = 0;
+                TA0CCR1 = incrementNum;
+                TA0CCR0 = 100;
+            }
+            else if (taps == 0){
+                TA0CCR0 = 0;
+                TA0CCR1 = 0;
+                TA0CCR0 = 100;
+                taps = 10;
+            }
+        }
+```
+The user presses the button to increase the brightness of the LED until it reaches max level (10) and then resets.
+# Original Assignment
 # Hardware PWM
 Now that you have done the software version of PWM, now it is time to start leveraging the other features of these Timer Modules.
 

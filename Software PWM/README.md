@@ -1,4 +1,67 @@
 # Software PWM
+
+The goal of this lab was to write a program that would utilize software techniques to synthesize PWM on an MSP430.
+## Implementation
+
+Similair to the other sections of this lab the correct pins need to be initialized as inputs and outputs. 
+
+```c
+	WDTCTL = WDTPW + WDTHOLD or WDTCTL = WDTPW | WDTHOLD
+```
+The pull up or pull down resistor should be enabled and then selected. In the example below the pull up is chosen.
+
+```c
+	P1REN|=BIT1;
+	P1OUT|=BIT1; 
+```
+
+The below code shows how to set up Timer A, SMCLK in up mode.
+```c
+	TA0CTL = TASSEL_2 + MC_1 ;
+
+```
+
+Using the method discussed in class, TA0CCR0 is initialized at 1000-1=999. TA0CCR1 is initialized at 500 setting the duty cycle to 50% at 1 kHz. The code below shows how to implement this.
+```c
+	TA0CCTL1 = (CCIE);
+	TA0CCTL0 = (CCIE);
+	TA0CCR0 = 1000-1;                        
+	TA0CCR1 = 500;                           
+
+```
+
+Set Low Power Mode:
+```c
+	 _BIS_SR(LPM4_bits + GIE);
+```
+
+Below shows the Port 1 interrupt service routine. This function is called when the button is pressed.
+```c
+#pragma vector=PORT1_VECTOR
+__interrupt void PORT1_IRS(void)
+{
+    P1IE &= ~BIT1;
+    __delay_cycles(100);
+    P1IE |= BIT1;
+
+    P9OUT |= BIT7; //Sets P9.4
+    if(TA0CCR1 < 1000)
+    {
+        int incrementNum = TA0CCR1 + 100;
+        TA0CCR0 = 0;
+        TA0CCR1 = incrementNum;
+        TA0CCR0 = 100;
+    }
+    else if (TA0CCR1 >= 1000){
+        TA0CCR0 = 0;
+        TA0CCR1 = 0;
+        TA0CCR0 = 1000;
+    }
+    P1IFG &= ~BIT1;
+}
+```
+# Original Assignment
+# Software PWM
 Most microprocessors will have a Timer module, but depending on the device, some may not come with pre-built PWM modules. Instead, you may have to utilize software techniques to synthesize PWM on your own.
 
 ## Task
