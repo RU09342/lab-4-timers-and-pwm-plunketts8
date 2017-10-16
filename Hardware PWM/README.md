@@ -1,4 +1,4 @@
-# Software PWM
+# Hardware PWM
 
 The goal of this lab was to write a program that would utilize hardware techniques to synthesize PWM on an MSP430.
 
