@@ -1,3 +1,39 @@
+# Debouncing
+
+The goal of this lab was to write a program that would implement a debounced switch to control the state of an LED.
+## Implementation
+
+Any microcontroller that uses buttons or other mechnical inputs must account for bouncing. One attempt user input should translate to one output. This program reduces the effects of bouncing by enabling the pull up resistor on the input button and initializing interrupts on it's rising or falling edge. 
+
+Simply put the processor should wait a set amount of time before it starts "accepting" another input. 
+
+
+The following code sets up port 1.1 as an input, enables the pull up/ pull down resistor, then chooses pull up
+```c
+	P1DIR &=~(BIT1); 
+	P1REN|=BIT1;
+	P1OUT|=BIT1; 
+
+```
+
+Enter low power mode and enable global interrupt
+```c
+	_BIS_SR(LPM4_bits + GIE); 
+
+```
+The following code acts as a debounce. It sets up Timer A, ,sets CCTL to compare mode, and sets the duration at which the interrupt is disabled. 
+```c
+TA0CTL = TASSEL_1 + MC_1 + ID_1; 
+    TA0CCTL0 = 0x10; 
+    TA0CCR0 = 3000;
+```
+
+The end of the program should have a line that renables the interrupt
+```c
+	P1IE |= BIT1;
+```
+
+# Original Assignment
 # Software Debouncing
 In previously labs, we talked about how objects such as switches can cause some nasty effects since they are actually a mechanical system at heart. We talked about the simple hardware method of debouncing, but due to the many different design constraints, you may not be able to add or adjust hardware. Debouncing is also only one of many applications which would require the use of built in Timers to allow for other processes to take place.
 
