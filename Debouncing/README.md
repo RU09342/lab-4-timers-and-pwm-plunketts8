@@ -33,7 +33,7 @@ The end of the program should have a line that renables the interrupt
 	P1IE |= BIT1;
 ```
 
-Collaborated with Matt Rodriquez and Austin Huang.
+Collaborated with Matt Rodriquez and Austin Huang
 
 
 # Original Assignment

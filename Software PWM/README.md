@@ -85,7 +85,7 @@ int main(void)
 '''
 This way, each of the steps in initialization can be isolated for easier understanding and debugging.
 
-Collaborated with Matt Rodriquez and Austin Huang.
+Collaborated with Matt Rodriquez and Austin Huang
 
 
 ## Extra Work
