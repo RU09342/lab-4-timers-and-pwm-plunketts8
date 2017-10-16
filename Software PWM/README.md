@@ -61,6 +61,7 @@ __interrupt void PORT1_IRS(void)
     P1IFG &= ~BIT1;
 }
 ```
+Collaborated with Matt Rodriquez and Austin Huang.
 
 # Original Assignment
 # Software PWM
