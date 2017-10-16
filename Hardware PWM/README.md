@@ -57,6 +57,9 @@ while(1)
         }
 ```
 The user presses the button to increase the brightness of the LED until it reaches max level (10) and then resets.
+
+Collaborated with Matt Rodriquez and Austin Huang.
+
 # Original Assignment
 # Hardware PWM
 Now that you have done the software version of PWM, now it is time to start leveraging the other features of these Timer Modules.

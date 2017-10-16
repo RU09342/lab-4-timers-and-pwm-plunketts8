@@ -1,6 +1,7 @@
 # Software PWM
 
 The goal of this lab was to write a program that would utilize software techniques to synthesize PWM on an MSP430.
+
 ## Implementation
 
 Similair to the other sections of this lab the correct pins need to be initialized as inputs and outputs. 
@@ -60,6 +61,7 @@ __interrupt void PORT1_IRS(void)
     P1IFG &= ~BIT1;
 }
 ```
+
 # Original Assignment
 # Software PWM
 Most microprocessors will have a Timer module, but depending on the device, some may not come with pre-built PWM modules. Instead, you may have to utilize software techniques to synthesize PWM on your own.
@@ -81,6 +83,8 @@ int main(void)
 }
 '''
 This way, each of the steps in initialization can be isolated for easier understanding and debugging.
+
+Collaborated with Matt Rodriquez and Austin Huang.
 
 
 ## Extra Work

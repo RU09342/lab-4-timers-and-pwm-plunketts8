@@ -33,6 +33,9 @@ The end of the program should have a line that renables the interrupt
 	P1IE |= BIT1;
 ```
 
+Collaborated with Matt Rodriquez and Austin Huang.
+
+
 # Original Assignment
 # Software Debouncing
 In previously labs, we talked about how objects such as switches can cause some nasty effects since they are actually a mechanical system at heart. We talked about the simple hardware method of debouncing, but due to the many different design constraints, you may not be able to add or adjust hardware. Debouncing is also only one of many applications which would require the use of built in Timers to allow for other processes to take place.
