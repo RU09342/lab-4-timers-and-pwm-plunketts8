@@ -42,7 +42,8 @@ int main(void) {
         if(!(P1IN & BIT1))
         {
             P9OUT |= BIT7; //Sets P9.4
-            if(taps > 0)
+           
+		    if(taps > 0)
             {
                 //extra work to increase brightness at log scale
                 taps--;
@@ -67,6 +68,7 @@ int main(void) {
             P9OUT &= ~BIT7; //Clear P9.4
 
 
+//debounce
         for(count=100;count>0;count--)
         {
         __delay_cycles(1000);

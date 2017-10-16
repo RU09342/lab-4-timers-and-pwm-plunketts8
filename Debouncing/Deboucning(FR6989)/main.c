@@ -23,12 +23,16 @@ void main(void) {
     _BIS_SR(LPM4_bits + GIE);
 }
 
+
+
 //Port 1 ISR
 #pragma vector=PORT1_VECTOR
 __interrupt void PORT_1(void)
 {
     int time=2000;
-    P1OUT ^=0x01;
+    
+	
+	P1OUT ^=0x01;
     P1IE &= ~BIT1;
     __delay_cycles(1);
 

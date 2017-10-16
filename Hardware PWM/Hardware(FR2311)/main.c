@@ -54,8 +54,9 @@ while(1)
 
     if((P1IN & BIT1))
             P2OUT &= ~BIT0; //Clear P9.4
-        // Debounce
-
+        
+		
+		// Debounce
     for(count=100;count>0;count--)
         {
         __delay_cycles(500);

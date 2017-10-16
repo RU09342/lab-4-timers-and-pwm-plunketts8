@@ -50,7 +50,9 @@ int main(void) {
 
         if((P5IN & BIT6))
             P1OUT &= ~BIT1; //Clear P1.1
-        // Debounce
+       
+	   
+	 // Debounce
         for(count=100;count>0;count--)
         {
         __delay_cycles(1000);

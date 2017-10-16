@@ -24,12 +24,16 @@ void main(void) {
     _BIS_SR(LPM4_bits + GIE);
 }
 
+
+
 //Port 1 ISR
 #pragma vector=PORT1_VECTOR
 __interrupt void PORT_1(void)
 {
     int time = 3000;
-    P1OUT ^=0x01; // Change state of P1.1
+    
+	
+	P1OUT ^=0x01; // Change state of P1.1
     P1IE &= ~BIT1; // Disable interrupt
     __delay_cycles(1);
 
@@ -41,6 +45,8 @@ __interrupt void PORT_1(void)
 
     P1IFG &=~(BIT1); // Clear flag
 }
+
+
 
 //Below re-enables interrupts
 #pragma vector=TIMER0_A0_VECTOR

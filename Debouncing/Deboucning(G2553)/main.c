@@ -31,7 +31,9 @@ void main(void) {
 __interrupt void PORT_1(void)
 {
     int time=2000;
-    P1OUT ^=0x01;
+    
+	
+	P1OUT ^=0x01;
     P1IE &= ~BIT3;
     __delay_cycles(1);
 

@@ -38,22 +38,22 @@ int main(void) {
             P1OUT |= BIT1; //Sets P1.1
 
 
-            if(TA0CCR1 < 1000)
+	if(TA0CCR1 < 1000)
             {
                 TA0CCR1 += 100;
             }
 
 
-            else if (TA0CCR1 >= 1000){
+	else if (TA0CCR1 >= 1000){
                 TA0CCR1 = 0;
             }
         }
 
 
-        if((P5IN & BIT6))
+	if((P5IN & BIT6))
             P1OUT &= ~BIT1; //Clear P1.1
         // Debounce
-        for(count=100;count>0;count--)
+	for(count=100;count>0;count--)
         {
         __delay_cycles(1000);
         }

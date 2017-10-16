@@ -28,6 +28,7 @@ int main(void) {
     TA0CCR0 = 100-1;
     TA0CCR1 = 50;
 
+
     while(1)
     {
         if(!(P1IN & BIT1))
@@ -35,7 +36,7 @@ int main(void) {
             P4OUT |= BIT7; //Sets P4.7
 
 
-            if(TA0CCR1 <= 90) // If the brightness is <= than 90%
+	if(TA0CCR1 <= 90) // If the brightness is <= than 90%
             {
                 TA0CCR0 = 0; // Reset CCR0
                 TA0CCR1 += 10; // Add 10%
@@ -43,7 +44,7 @@ int main(void) {
             }
 
 
-            else if (TA0CCR1 == 100){ // If the brightness is at 100%
+	else if (TA0CCR1 == 100){ // If the brightness is at 100%
                 TA0CCR0 = 0; // Reset CCR0
                 TA0CCR1 = 0; // Reset CCR1
                 TA0CCR0 = 100; //  Set CCR0 back to 10 kHz
@@ -51,10 +52,11 @@ int main(void) {
         }
 
 
-        if((P1IN & BIT1))
+	if((P1IN & BIT1))
             P4OUT &= ~BIT7; //Clear P4.7
-        // Debounce
-        for(count=100;count>0;count--)
+       
+	    // Debounce
+	for(count=100;count>0;count--)
         {
         __delay_cycles(500);
         }
