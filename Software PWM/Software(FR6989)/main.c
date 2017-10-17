@@ -33,7 +33,10 @@ int main(void) {
     TA0CCR1 = 500;                           // 50% Duty Cycle
 
     __bis_SR_register(GIE);
-    while(1)
+
+
+
+while(1)
     {
         if((P1IN & BIT1))
             P9OUT &= ~BIT7; //Clear P9.4

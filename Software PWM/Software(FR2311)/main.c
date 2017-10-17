@@ -6,8 +6,9 @@
  * main.c
  * Software PWM
  */
-volatile unsigned int count;
-int taps = 10;
+
+int count;
+int ticks = 10;
 
 int main(void) {
     WDTCTL = WDTPW | WDTHOLD;               // Stop watchdog timer
@@ -36,13 +37,15 @@ int main(void) {
     //enable global interrupt
     __bis_SR_register(GIE);
 
-    while(1)
+
+while(1)
     {
         if((P1IN & BIT1))
             P2OUT &= ~BIT0; //Clear P9.4
 
     }
 }
+
 
 //Timer A interrupt vectors
 #pragma vector=TIMER0_B1_VECTOR

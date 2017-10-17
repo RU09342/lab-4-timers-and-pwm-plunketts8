@@ -6,7 +6,8 @@
  * main.c
  * Software PWM
  */
-volatile unsigned int count;
+
+int count;
 int taps = 10;
 
 int main(void) {
@@ -39,6 +40,7 @@ int main(void) {
 
     //enable global interrupt
     __bis_SR_register(GIE);
+
 
 while(1)
     {
