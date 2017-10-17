@@ -16,21 +16,23 @@ int main(void) {
     P1OUT &= ~BIT0;                         // Switch LED off
 
 
-    P9DIR |=BIT7; //set Port 9.4 output ---LED
-    P9OUT &= ~BIT7; //Clear P9.4
+    P9DIR |=BIT7; 							//set Port 9.4 output 
+    P9OUT &= ~BIT7; 						//Clear P9.4
     P1DIR  &= ~BIT1;                        // Set P1.1 as input
     P1OUT |= BIT1;                          // Configure P1.1 for Pull-Up
     P1REN |= BIT1;                          // Enable Pull Up of P1.1
-    P1IE |= BIT1; //enable the interrupt on Port 1.1
-    P1IES &= ~BIT1; //set as falling edge
-    P1IFG &= ~(BIT1); //clear interrupt flag
+    
+	P1IE |= BIT1; 
+    P1IES &= ~BIT1; 
+    P1IFG &= ~(BIT1); 
 
-
-    TA0CTL = TASSEL_2 + MC_1 ;       // SMCLK / Upmode
+     // SMCLK / Upmode
+    TA0CTL = TASSEL_2 + MC_1 ;      
     TA0CCTL1 = (CCIE);
     TA0CCTL0 = (CCIE);
-    TA0CCR0 = 1000-1;                        // PWM Frequency 10 kHz
-    TA0CCR1 = 500;                           // 50% Duty Cycle
+    //Ask Dr.Tang about this line from class
+    TA0CCR0 = 1000-1;                       
+    TA0CCR1 = 500;                           
 
     __bis_SR_register(GIE);
 
@@ -78,9 +80,9 @@ __interrupt void PORT1_IRS(void)
     P9OUT |= BIT7; //Sets P9.4
     if(TA0CCR1 < 1000)
     {
-        int incrementNum = TA0CCR1 + 100;
+        int x = TA0CCR1 + 100;
         TA0CCR0 = 0;
-        TA0CCR1 = incrementNum;
+        TA0CCR1 = x;
         TA0CCR0 = 100;
     }
     else if (TA0CCR1 >= 1000){

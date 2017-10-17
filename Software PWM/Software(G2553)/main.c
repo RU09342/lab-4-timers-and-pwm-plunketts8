@@ -19,9 +19,11 @@ int main(void) {
     P1DIR  &= ~BIT3;                        // Set P1.3 as input
     P1OUT |= BIT3;                          // Configure P1.3 for Pull-Up
     P1REN |= BIT3;                          // Enable Pull Up of P1.3
-    P1IE |= BIT3; //enable the interrupt on Port 1.3
-    P1IES &= ~BIT3; //set as falling edge
-    P1IFG &= ~(BIT3); //clear interrupt flag
+    
+	
+	P1IE |= BIT3; 
+    P1IES &= ~BIT3; 
+    P1IFG &= ~(BIT3); 
 
 
     TA0CTL = TASSEL_2 + MC_1 ;
@@ -88,12 +90,22 @@ __interrupt void Timer0_A1_ISR (void)
 
 
 
+/*
+#pragma vector=TIMER0_A0_VECTOR
+__interrupt void Timer0_A0_ISR (void)
+{
+    if(TA0CCR0 != 0){
+        P1OUT |= (BIT0); //turns on red led
+    }
+    TA0CCTL0 &= ~BIT0;  //clears flag
+}
+*/
 
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer0_A0_ISR (void)
 {
     if(TA0CCR1 != 0){
-        P1OUT |= (BIT0); //turns on red led
+        P1OUT |= (BIT0);
     }
-    TA0CCTL0 &= ~BIT0;  //clears flag
+    TA0CCTL0 &= ~BIT0;
 }

@@ -17,18 +17,18 @@ int main(void) {
     P1DIR |= BIT0;                          // Set P1.0 to output direction
     P1OUT &= ~BIT0;                         // Switch LED off
 
+	//same process as all other labs
+    P1DIR |=BIT1; 
+    P1OUT &= ~BIT1; 
 
-    P1DIR |=BIT1; //set Port 9.4 output ---LED
-    P1OUT &= ~BIT1; //Clear P9.4
-
-    P5DIR  &= ~BIT6;                        // Set P1.1 as input
-    P5OUT |= BIT6;                          // Configure P1.1 for Pull-Up
-    P5REN |= BIT6;                          // Enable Pull Up of P1.1
+    P5DIR  &= ~BIT6;                        
+    P5OUT |= BIT6;                          
+    P5REN |= BIT6;                          
 
 
-    P5IE |= BIT6; //enable the interrupt on Port 1.1
-    P5IES &= ~BIT6; //set as falling edge
-    P5IFG &= ~(BIT6); //clear interrupt flag
+    P5IE |= BIT6; 
+    P5IES &= ~BIT6; 
+    P5IFG &= ~(BIT6); 
 
 
     //Timer set up
@@ -85,7 +85,7 @@ __interrupt void PORT5_IRS(void)
     __delay_cycles(1000);
     P5IE |= BIT6;
 
-    P1OUT |= BIT1; //Sets P9.4
+    P1OUT |= BIT1; 
 
  if(TA0CCR1 < 1000)
     {
