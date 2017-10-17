@@ -18,12 +18,13 @@ int main(void) {
     P1DIR |= BIT0;
 
 
-    P9DIR |=BIT7; //set Port 9.4 output ---LED
-    P9OUT &= ~BIT7; //Clear P9.4
+    P9DIR |=BIT7; 
+    P9OUT &= ~BIT7; 
 
-    P1DIR  &= ~BIT1;                        // Set P1.1 as input
-    P1OUT |= BIT1;                          // Configure P1.1 for Pull-Up
-    P1REN |= BIT1;                          // Enable Pull Up of P1.1
+	//pull up resistor
+    P1DIR  &= ~BIT1;                        
+    P1OUT |= BIT1;                          
+    P1REN |= BIT1;                         
 
     //reset/set mode and initializes timer
     TA0CCTL1 = OUTMOD_7;
@@ -41,7 +42,7 @@ int main(void) {
     {
         if(!(P1IN & BIT1))
         {
-            P9OUT |= BIT7; //Sets P9.4
+            P9OUT |= BIT7; //Sets P9.7
            
 		    if(taps > 0)
             {
@@ -65,7 +66,7 @@ int main(void) {
 
 
         if((P1IN & BIT1))
-            P9OUT &= ~BIT7; //Clear P9.4
+            P9OUT &= ~BIT7; //Clear P9.7
 
 
 //debounce

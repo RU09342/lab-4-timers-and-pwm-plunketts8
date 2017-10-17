@@ -16,29 +16,31 @@ int main(void) {
     P1DIR |= BIT0;                          // Set P1.0 to output direction
     P1OUT &= ~BIT0;                         // Switch LED off
 
+	//ins and outs
+    P2DIR |=BIT0;                           
+    P2OUT &= ~BIT0;                         
 
-    P2DIR |=BIT0;                           //set Port 2.0 output ---LED
-    P2OUT &= ~BIT0;                         //Clear P2.0
+	//pull up resistor
+    P1DIR  &= ~BIT1;                       
+    P1OUT |= BIT1;                          
+    P1REN |= BIT1;                          
 
-    P1DIR  &= ~BIT1;                        // Set P1.1 as input
-    P1OUT |= BIT1;                          // Configure P1.1 for Pull-Up
-    P1REN |= BIT1;                          // Enable Pull Up of P1.1
-
-    TB0CCTL1 = OUTMOD_7;                    // Reset/Set Mode
-    TB0CTL = TBSSEL_2 + MC_1 +TBCLR ;       // SMCLK / Upmode
-    TB0CCR0 = 100-1;                        // PWM Frequency 10 kHz
-    TB0CCR1 = 50;                           // 50% Duty Cycle
+	//SMCLK and pwm frequency
+    TB0CCTL1 = OUTMOD_7;                    
+    TB0CTL = TBSSEL_2 + MC_1 +TBCLR ;       
+    TB0CCR0 = 100-1;                       
+    TB0CCR1 = 50;                         
 
 
 while(1)
     {
 
-    if(!(P1IN & BIT1)) //If the button is pressed
+    if(!(P1IN & BIT1)) //interrupt
         {
-            P2OUT |= BIT0; //Sets P9.4
+            P2OUT |= BIT0;
 
 
-    if(TB0CCR1 <= 90) // If the brightness is <= than 90%
+    if(TB0CCR1 <= 90) 
             {
                 TB0CCR0 = 0; // Reset CCR0
                 TB0CCR1 += 10; // Add 10%
@@ -53,7 +55,7 @@ while(1)
 
 
     if((P1IN & BIT1))
-            P2OUT &= ~BIT0; //Clear P9.4
+            P2OUT &= ~BIT0; 
         
 		
 		// Debounce

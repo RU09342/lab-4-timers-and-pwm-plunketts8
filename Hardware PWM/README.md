@@ -58,6 +58,8 @@ while(1)
 ```
 The user presses the button to increase the brightness of the LED until it reaches max level (10) and then resets.
 
+Extra work done here was implementing brightness to increase a log scale.
+
 Collaborated with Matt Rodriquez and Austin Huang
 
 # Original Assignment

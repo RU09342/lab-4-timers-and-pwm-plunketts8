@@ -13,9 +13,9 @@ int main(void) {
     P1DIR |= BIT0;
     P1OUT &= ~BIT0;
 
-
-    P4DIR |=BIT7;                           //set Port 9.4 output ---LED
-    P4OUT &= ~BIT7;                         //Clear P9.4
+	//ins and outs
+    P4DIR |=BIT7;                           
+    P4OUT &= ~BIT7;                        
 
     //pull up resistor
     P2DIR  &= ~BIT1;
@@ -36,11 +36,11 @@ int main(void) {
             P4OUT |= BIT7; //Sets P4.7
 
 
-	if(TA0CCR1 <= 90) // If the brightness is <= than 90%
+	if(TA0CCR1 <= 90) 
             {
                 TA0CCR0 = 0; // Reset CCR0
-                TA0CCR1 += 10; // Add 10%
-                TA0CCR0 = 100; // Set CCR0 back to 10 kHz
+                TA0CCR1 += 10; 
+                TA0CCR0 = 100; //
             }
 
 

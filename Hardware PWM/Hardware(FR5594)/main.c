@@ -24,7 +24,7 @@ int main(void) {
     //set up Timer
     TA0CTL = TASSEL_2 + MC_1 +TACLR ;
 
-
+	//same as other labs
     TA0CCTL1 = OUTMOD_7;
     TA0CCR0 = 1000;
     TA0CCR1 = 500;
@@ -35,7 +35,7 @@ int main(void) {
     {
         if(!(P5IN & BIT6))
         {
-            P1OUT |= BIT1; //Sets P1.1
+            P1OUT |= BIT1; 
 
 
 	if(TA0CCR1 < 1000)

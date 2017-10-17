@@ -15,8 +15,8 @@ void main(void) {
     P1REN|=BIT3;//enable pull-up/pull-down resistor on
     P1OUT|=BIT3; //choose the pull-up resistor
 
-    P1IE |=BIT3;//enable the interrupt on Port 1.1
-    P1IES |=BIT3;//set as falling edge
+    P1IE |=BIT3;
+    P1IES |=BIT3;
     P1IFG &=~(BIT3);//clear interrupt flag
 
     //lpm Notice LPM0 not LPM4 like other boards

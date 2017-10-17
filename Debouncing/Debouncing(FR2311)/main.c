@@ -31,13 +31,13 @@ __interrupt void PORT_1(void)
     int time = 2000;
     
 	
-	P1OUT ^=0x01; // Change state of P1.1
-    P1IE &= ~BIT1; // Disable interrupt
+	P1OUT ^=BIT1; 
+    P1IE &= ~BIT1; 
     __delay_cycles(1);
 
     //Debounce by setting up Timer and comparing CCTL and duration set
-    TB0CTL = TBSSEL_1 + MC_1 + ID_1; //Set up Timer B, Count up, divider 2
-    TB0CCTL0 = 0x10; // Set up compare mode for CCTL
+    TB0CTL = TBSSEL_1 + MC_1 + ID_1; 
+    TB0CCTL0 = BIT2; 
     TB0CCR0 = time;
 
     P1IFG &=~(BIT1); // Clear flag

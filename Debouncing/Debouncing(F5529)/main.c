@@ -34,7 +34,7 @@ __interrupt void PORT_1(void)
     int time =3000;
    
    
-    P1OUT ^=0x01; // Change state of P1.1
+    P1OUT ^=0x01; 
     P1IE &= ~BIT1; // Disable interrupt
     __delay_cycles(1);
 
